@@ -20,15 +20,15 @@ class Server {
     }
 
     config() {
-        //const MONGO_URI = "mongodb://localhost/test";
+        const MONGO_URI = "mongodb://25.10.35.240:27035";
         //mongoose.set("useFindAndModify", true);
         mongoose
-            .connect(config.DB.URI , {
+            .connect(MONGO_URI, {
                 useNewUrlParser: true,
                 useCreateIndex: true,
                 useUnifiedTopology: true,
             })
-            .then((db) => console.log("DB is connected"));
+            .then((db) => console.log("DB is connected")).catch(err => console.log( err ));
         // settings
         this.app.set("port", process.env.PORT || 3000);
         //middlewares

@@ -9,7 +9,6 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const cors_1 = __importDefault(require("cors"));
 const passport_1 = __importDefault(require("passport"));
 const passport_2 = __importDefault(require("./middlewares/passport"));
-const config_1 = __importDefault(require("./config/config"));
 const indexRoutes_1 = __importDefault(require("./routes/indexRoutes"));
 const ProductRoutes_1 = __importDefault(require("./routes/ProductRoutes"));
 const authRoutes_1 = __importDefault(require("./routes/authRoutes"));
@@ -21,15 +20,15 @@ class Server {
         this.routes();
     }
     config() {
-        //const MONGO_URI = "mongodb://localhost/test";
+        const MONGO_URI = "mongodb://25.10.35.240:27035";
         //mongoose.set("useFindAndModify", true);
         mongoose_1.default
-            .connect(config_1.default.DB.URI, {
+            .connect(MONGO_URI, {
             useNewUrlParser: true,
             useCreateIndex: true,
             useUnifiedTopology: true,
         })
-            .then((db) => console.log("DB is connected"));
+            .then((db) => console.log("DB is connected")).catch(err => console.log(err));
         // settings
         this.app.set("port", process.env.PORT || 3000);
         //middlewares
