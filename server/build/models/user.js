@@ -39,7 +39,7 @@ userSchema.pre('save', function (next) {
     });
 });
 //compara la contraseña ingresada con la guardada
-userSchema.methods.checkPassword = function (password) {
+userSchema.methods.comparePassword = function (password) {
     return __awaiter(this, void 0, void 0, function* () {
         return yield bcrypt_1.default.compare(password, this.password);
     });

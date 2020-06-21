@@ -1,10 +1,11 @@
 import {model, Schema, Document} from 'mongoose'
-import { type } from 'os'
 import bcrypt from 'bcrypt';
 
-export interface UserInterface extends Document{
-    email: string,
-    password: string
+export interface IUser extends Document{
+    email: string;
+    password: string;
+    comparePassword: (password: string) => Promise<boolean>
+
 }
 
 const userSchema = new Schema({
@@ -21,7 +22,7 @@ const userSchema = new Schema({
 });
 
 //metodo que cifra el password de un nuevo usuario
-userSchema.pre<UserInterface>('save', async function(next){
+userSchema.pre<IUser>('save', async function(next){
     const newUser = this;
     if(!newUser.isModified('password'))  return next();
 
@@ -32,8 +33,8 @@ userSchema.pre<UserInterface>('save', async function(next){
 });
 
 //compara la contraseña ingresada con la guardada
-userSchema.methods.checkPassword = async function (password: string): Promise<boolean> {
+userSchema.methods.comparePassword = async function (password: string): Promise<boolean> {
    return  await bcrypt.compare(password, this.password);
 } 
 
-export default model<UserInterface>('User',userSchema);
+export default model<IUser>('User',userSchema);
