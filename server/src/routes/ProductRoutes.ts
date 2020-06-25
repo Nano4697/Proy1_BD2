@@ -1,5 +1,6 @@
 import { Request, Response, Router } from "express";
 import Product from "../models/products";
+import passport from 'passport'
 
 class ProductRoutes {
     router: Router;
@@ -53,8 +54,8 @@ class ProductRoutes {
     }
 
     routes() {
-        this.router.get("/", this.getProducts);
-        this.router.post("/", this.createProduct);
+        this.router.get("/", passport.authenticate('jwt', {session: false}),this.getProducts);
+        this.router.post("/", passport.authenticate('jwt', {session: false}),this.createProduct);
     }
 }
 

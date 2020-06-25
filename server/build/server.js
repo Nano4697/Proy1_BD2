@@ -20,7 +20,7 @@ class Server {
         this.routes();
     }
     config() {
-        const MONGO_URI = "mongodb://25.10.35.240:27035";
+        const MONGO_URI = "mongodb://localhost:27035/test";
         //mongoose.set("useFindAndModify", true);
         mongoose_1.default
             .connect(MONGO_URI, {
