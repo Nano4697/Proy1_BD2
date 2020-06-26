@@ -20,7 +20,7 @@ class Server {
         this.routes();
     }
     config() {
-        const MONGO_URI = "mongodb://localhost:27035/test";
+        const MONGO_URI = "mongodb://25.10.74.190:27029,25.11.15.59:27019,25.109.145.243:27033,25.10.146.93:27031,25.10.35.240:27030/DBCR";
         //mongoose.set("useFindAndModify", true);
         mongoose_1.default
             .connect(MONGO_URI, {
@@ -28,9 +28,10 @@ class Server {
             useCreateIndex: true,
             useUnifiedTopology: true,
         })
-            .then((db) => console.log("DB is connected")).catch(err => console.log(err));
+            .then((db) => console.log("DB is connected"))
+            .catch((err) => console.log(err));
         // settings
-        this.app.set("port", process.env.PORT || 3000);
+        this.app.set("port", process.env.PORT || 3001);
         //middlewares
         this.app.use(morgan_1.default("dev"));
         this.app.use(express_1.default.json());

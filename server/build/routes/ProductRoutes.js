@@ -66,8 +66,8 @@ class ProductRoutes {
         });
     }
     routes() {
-        this.router.get("/", passport_1.default.authenticate('jwt', { session: false }), this.getProducts);
-        this.router.post("/", passport_1.default.authenticate('jwt', { session: false }), this.createProduct);
+        this.router.get("/", passport_1.default.authenticate("jwt", { session: false }), this.getProducts);
+        this.router.post("/", passport_1.default.authenticate("jwt", { session: false }), this.createProduct);
     }
 }
 const productRoutes = new ProductRoutes();
