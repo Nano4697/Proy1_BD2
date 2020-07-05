@@ -44,9 +44,16 @@ class ProductRoutes {
                     res.json("not a number");
                 }
             }
+            else if (req.query.hasOwnProperty("place")) {
+                const place = req.query.place;
+                const productos = yield products_1.default.find({
+                    place: place,
+                });
+                res.json({ data: productos });
+            }
             else {
                 const productos = yield products_1.default.find();
-                res.json(productos);
+                res.json({ data: productos });
             }
         });
     }
@@ -58,6 +65,8 @@ class ProductRoutes {
                 name,
                 description,
                 price,
+                lat: location.coordinates[0],
+                long: location.coordinates[1],
                 place,
                 location,
             });
