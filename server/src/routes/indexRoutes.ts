@@ -9,7 +9,9 @@ class IndexRoutes {
     }
 
     routes() {
-        this.router.get("/", (req, res) => res.send("Hello"));
+        this.router.get("/", (req: Request, res: Response) =>
+            res.send("Hello")
+        );
     }
 }
 

@@ -12,8 +12,8 @@ class ProductRoutes {
 
     async getProducts(req: Request, res: Response) {
         if (
-            req.query.hasOwnProperty("lat") &&
-            req.query.hasOwnProperty("long")
+            Object.prototype.hasOwnProperty.call(req.query, "lat") &&
+            Object.prototype.hasOwnProperty.call(req.query, "long")
         ) {
             const lat = Number(req.query.lat);
             const long = Number(req.query.long);
@@ -33,7 +33,7 @@ class ProductRoutes {
             } else {
                 res.json("not a number");
             }
-        } else if (req.query.hasOwnProperty("place")) {
+        } else if (Object.prototype.hasOwnProperty.call(req.query, "place")) {
             const place = req.query.place;
             const productos = await Product.find({
                 place: place,

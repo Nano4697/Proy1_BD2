@@ -22,8 +22,8 @@ class ProductRoutes {
     }
     getProducts(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            if (req.query.hasOwnProperty("lat") &&
-                req.query.hasOwnProperty("long")) {
+            if (Object.prototype.hasOwnProperty.call(req.query, "lat") &&
+                Object.prototype.hasOwnProperty.call(req.query, "long")) {
                 const lat = Number(req.query.lat);
                 const long = Number(req.query.long);
                 if (!isNaN(lat) && !isNaN(long)) {
@@ -44,7 +44,7 @@ class ProductRoutes {
                     res.json("not a number");
                 }
             }
-            else if (req.query.hasOwnProperty("place")) {
+            else if (Object.prototype.hasOwnProperty.call(req.query, "place")) {
                 const place = req.query.place;
                 const productos = yield products_1.default.find({
                     place: place,

@@ -19,22 +19,22 @@ const userSchema = new mongoose_1.Schema({
         type: String,
         unique: true,
         required: true,
-        lowercase: true
+        lowercase: true,
     },
     password: {
         type: String,
-        required: true
-    }
+        required: true,
+    },
 });
 //metodo que cifra el password de un nuevo usuario
-userSchema.pre('save', function (next) {
+userSchema.pre("save", function (next) {
     return __awaiter(this, void 0, void 0, function* () {
-        const newUser = this;
-        if (!newUser.isModified('password'))
+        const self = this;
+        if (!self.isModified("password"))
             return next();
         const salt = yield bcrypt_1.default.genSalt(10);
-        const hashedPassword = yield bcrypt_1.default.hash(newUser.password, salt);
-        newUser.password = hashedPassword;
+        const hashedPassword = yield bcrypt_1.default.hash(self.password, salt);
+        self.password = hashedPassword;
         next();
     });
 });
@@ -44,4 +44,4 @@ userSchema.methods.comparePassword = function (password) {
         return yield bcrypt_1.default.compare(password, this.password);
     });
 };
-exports.default = mongoose_1.model('User', userSchema);
+exports.default = mongoose_1.model("User", userSchema);

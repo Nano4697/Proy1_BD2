@@ -21,11 +21,11 @@ function createToken(user) {
 }
 exports.signUp = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     if (!req.body.email || !req.body.password) {
-        return res.status(400).json({ msg: 'Send your email and password' });
+        return res.status(400).json({ msg: "Send your email and password" });
     }
     const user = yield user_1.default.findOne({ email: req.body.email });
     if (user) {
-        return res.status(400).json({ msg: 'User is already registered' });
+        return res.status(400).json({ msg: "User is already registered" });
     }
     const newUser = new user_1.default(req.body);
     yield newUser.save();
@@ -33,17 +33,17 @@ exports.signUp = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.signIn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     if (!req.body.email || !req.body.password) {
-        return res.status(400).json({ msg: 'Send your email and password' });
+        return res.status(400).json({ msg: "Send your email and password" });
     }
     const user = yield user_1.default.findOne({ email: req.body.email });
     if (!user) {
-        return res.status(400).json({ msg: 'User does not exist' });
+        return res.status(400).json({ msg: "User does not exist" });
     }
     const isMatch = yield user.comparePassword(req.body.password);
     if (isMatch) {
         return res.status(200).json({ token: createToken(user) });
     }
     return res.status(400).json({
-        msg: 'The email or password are incorrect'
+        msg: "The email or password are incorrect",
     });
 });

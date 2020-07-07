@@ -9,10 +9,11 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const cors_1 = __importDefault(require("cors"));
 const passport_1 = __importDefault(require("passport"));
 const passport_2 = __importDefault(require("./middlewares/passport"));
+// import config from "./config/config";
 const indexRoutes_1 = __importDefault(require("./routes/indexRoutes"));
 const ProductRoutes_1 = __importDefault(require("./routes/ProductRoutes"));
 const authRoutes_1 = __importDefault(require("./routes/authRoutes"));
-const protectedRoutes_1 = __importDefault(require("./routes/protectedRoutes"));
+// import protectedRoutes from "./routes/protectedRoutes";
 class Server {
     constructor() {
         this.app = express_1.default();
@@ -28,7 +29,7 @@ class Server {
             useCreateIndex: true,
             useUnifiedTopology: true,
         })
-            .then((db) => console.log("DB is connected"))
+            .then(() => console.log("DB is connected"))
             .catch((err) => console.log(err));
         // settings
         this.app.set("port", process.env.PORT || 3001);
@@ -44,7 +45,6 @@ class Server {
         this.app.use(indexRoutes_1.default);
         this.app.use("/api/products", ProductRoutes_1.default);
         this.app.use(authRoutes_1.default);
-        this.app.use(protectedRoutes_1.default);
     }
     start() {
         this.app.listen(this.app.get("port"), () => {

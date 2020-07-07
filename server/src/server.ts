@@ -5,11 +5,11 @@ import cors from "cors";
 import passport from "passport";
 import passportMiddleware from "./middlewares/passport";
 
-import config from "./config/config";
+// import config from "./config/config";
 import indexRoutes from "./routes/indexRoutes";
 import ProductRoutes from "./routes/ProductRoutes";
 import authRoutes from "./routes/authRoutes";
-import protectedRoutes from "./routes/protectedRoutes";
+// import protectedRoutes from "./routes/protectedRoutes";
 
 class Server {
     public app: express.Application;
@@ -29,7 +29,7 @@ class Server {
                 useCreateIndex: true,
                 useUnifiedTopology: true,
             })
-            .then((db) => console.log("DB is connected"))
+            .then(() => console.log("DB is connected"))
             .catch((err) => console.log(err));
         // settings
         this.app.set("port", process.env.PORT || 3001);
@@ -46,7 +46,6 @@ class Server {
         this.app.use(indexRoutes);
         this.app.use("/api/products", ProductRoutes);
         this.app.use(authRoutes);
-        this.app.use(protectedRoutes);
     }
 
     start() {
